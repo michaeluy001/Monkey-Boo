@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap');
+@import "tailwindcss";
+
+
+
+
+
+#root {
+  font-family: "Comic Relief";
+  height: 100vh;
+  background-image: url(./assets/jungle_background_1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
