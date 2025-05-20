@@ -2,17 +2,27 @@ import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import useFruitsGenerator from "./useFruitsGenerator.js";
 import { usePlaceMonkey } from "./MonkeyGenerator.js";
-import { useClickedTilesCounter } from "./ScoreKeeper.js";
 import { useGameContext } from "./GameContext.jsx";
 import GameOver from "./GameOver.jsx";
+import {
+  useGoalTracker,
+  useLevelHandler,
+  useClickCounter,
+} from "./GameLogicHelper.js";
 
 const Board = (props) => {
-  const [isDisabled, setIsDisabled] = useState(false);
-  const { increment, count } = useClickedTilesCounter();
-  const scoreRef = useRef(null);
   const fruits = useFruitsGenerator(9);
   const monkeyIndex = usePlaceMonkey(9);
-  const {isGameOver} = useGameContext(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const { isGameOver } = useGameContext(false);
+
+  const [tileScore, setTileScore] = useState(0);
+  const { clickCount } = useClickCounter(score);
+  const { goal } = useLevelHandler(props.level);
+  const { isLevelComplete } = useGoalTracker(clickCount, goal);
+
   
 
   const handleMonkeyFound = () => {
@@ -20,20 +30,22 @@ const Board = (props) => {
     props.onGameOver;
   };
 
-  const updateScore = (scr) => {
-    scoreRef.current = scoreRef.current + scr;
-    if (scr > 0) increment();
+  const updateScore = (newScr) => {
+    setTileScore(newScr);
+    setScore(score + newScr);
+ 
   };
 
   useEffect(() => {
-    console.log(monkeyIndex);
+    console.log("click Count", clickCount);
+    console.log("Tile Score", tileScore);
+    console.log("Score: ", score)
+    console.log("GOAL", goal);
+  }, [score]);
 
-    if (count > 7) {
-      setIsDisabled(true);
-    }
-  }, [scoreRef.current]);
-
-
+  useEffect(() => {
+    if (isLevelComplete) setIsDisabled(true);
+  }, [isLevelComplete]);
 
   return (
     <>
@@ -43,14 +55,14 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === monkeyIndex}
+            isAMonkey={index === 9}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
           />
         ))}
       </div>
-
+      {isLevelComplete}
       {isGameOver && <GameOver />}
     </>
   );
