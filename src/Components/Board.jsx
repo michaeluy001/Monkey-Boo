@@ -9,21 +9,20 @@ import {
   useLevelHandler,
   useClickCounter,
 } from "./GameLogicHelper.js";
+import LevelUpDialog from "./LevelUpDialog.jsx";
 
 const Board = (props) => {
   const fruits = useFruitsGenerator(9);
   const monkeyIndex = usePlaceMonkey(9);
   const [isDisabled, setIsDisabled] = useState(false);
   const [score, setScore] = useState(0);
-
   const { isGameOver } = useGameContext(false);
-
   const [tileScore, setTileScore] = useState(0);
   const { clickCount } = useClickCounter(score);
   const { goal } = useLevelHandler(props.level);
   const { isLevelComplete } = useGoalTracker(clickCount, goal);
+  const [isLevelUpDialogOpen, setLevelUpDialogOpen] = useState(false);
 
-  
 
   const handleMonkeyFound = () => {
     setIsDisabled(true);
@@ -33,19 +32,31 @@ const Board = (props) => {
   const updateScore = (newScr) => {
     setTileScore(newScr);
     setScore(score + newScr);
- 
   };
 
   useEffect(() => {
     console.log("click Count", clickCount);
     console.log("Tile Score", tileScore);
-    console.log("Score: ", score)
+    console.log("Score: ", score);
     console.log("GOAL", goal);
   }, [score]);
 
   useEffect(() => {
-    if (isLevelComplete) setIsDisabled(true);
+    if (isLevelComplete) {
+      setIsDisabled(true);
+      setLevelUpDialogOpen(true);
+    }
   }, [isLevelComplete]);
+
+  const handleNextLevel = () => {
+    setLevelUpDialogOpen(false);
+    props.onLevelUp();
+    props.onReset();
+    setIsDisabled(false);
+    props.onGameScoreUpdate(score);
+  };
+
+
 
   return (
     <>
@@ -55,15 +66,15 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === 9}
+            isAMonkey={index === monkeyIndex}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
           />
         ))}
       </div>
-      {isLevelComplete}
-      {isGameOver && <GameOver />}
+      {isLevelUpDialogOpen && <LevelUpDialog onNextLevel={handleNextLevel} />}
+      {isGameOver && <GameOver score={props.gameScore} level={props.level} />}
     </>
   );
 };

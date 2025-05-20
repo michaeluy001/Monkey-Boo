@@ -1,9 +1,8 @@
+import GameOverForm from "./GameOver-Form";
 import ReturnButton from "./ReturnButton";
 import { motion } from "motion/react";
 
-
-const GameOver = () => {
-
+const GameOver = (props) => {
   return (
     <>
       <motion.div
@@ -21,10 +20,14 @@ const GameOver = () => {
         <div className="my-10">
           <span className="text-6xl font-bold tracking-widest ">
             Game Over!
+            Your Score: {props.score}
           </span>
+         
+         {/* <GameOverForm score={props.score}/> */}
+
+          
         </div>
         <div className="space-y-3 font-bold flex flex-col">
-  
           <div className="p-5 justify-items-center flex gap-3 text-2xl">
             <ReturnButton />
           </div>

@@ -33,15 +33,14 @@ const useGoalTracker = (clickCount, goal) => {
   return { isLevelComplete, setIsLevelComplete };
 };
 
-
-const useClickCounter = (score)=> {
+const useClickCounter = (score) => {
   const [clickCount, setClickCount] = useState(0);
 
-  useEffect(()=> {
-    if(score) setClickCount(clickCount+1)
-  }, [score])
-    
-  return {clickCount}
-}
+  useEffect(() => {
+    if (score) setClickCount(clickCount + 1);
+  }, [score]);
 
-export { useLevelHandler, useGoalTracker, useClickCounter  };
+  return { clickCount };
+};
+
+export { useLevelHandler, useGoalTracker, useClickCounter };

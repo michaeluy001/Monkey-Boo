@@ -10,6 +10,7 @@ const Button = ({
     green:  "bg-green-700 ring-green-600 shadow-green-800/100",
     yellow:  "bg-yellow-400 ring-yellow-300 shadow-yellow-600/100",
     red:  "bg-red-700 ring-red-600 shadow-red-600/100",
+    nextLevel:  "bg-yellow-800 ring-yellow-700 shadow-yellow-800/100",
 
   }
 
