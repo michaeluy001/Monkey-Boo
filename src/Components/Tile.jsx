@@ -3,11 +3,9 @@ import { useState, useRef } from "react";
 import { useInitializeMonkey } from "./MonkeyGenerator";
 import { useGameContext } from "./GameContext";
 
-
 const Tile = (props) => {
-
   const [isAMonkey, setIsAMonkey] = useState(false);
-  const {setIsGameOver} = useGameContext();
+  const { setIsGameOver } = useGameContext();
   const fruit = props.fruit;
   const [isFruitVisible, setIsFruitVisible] = useState(true);
   const monkeyInfo = useInitializeMonkey("Monkeyboo");
@@ -30,7 +28,7 @@ const Tile = (props) => {
     }
   };
 
-  const generateScore = (fruitScore) => { 
+  const generateScore = (fruitScore) => {
     props.onScoreUpdate(fruitScore);
   };
 
