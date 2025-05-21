@@ -32,14 +32,24 @@ const LevelUpDialog = (props) => {
 
   return (
     <>
-      <div className="bg-amber-300/30 h-screen  w-full  fixed top-0 left-0 flex items-center overflow-hidden">
+      <motion.div
+        className="bg-amber-300/50 h-screen  w-full  fixed top-0 left-0 flex items-center overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
         <motion.div
-          className="relative bg-amber-400 flex flex-col text-3xl h-1/3 w-full justify-center items-center space-y-10 "
+          className="relative bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-2/3 w-full justify-center items-center space-y-5"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 1, type: "spring" }}
+          transition={{ duration: 1, delay: 1, type: "spring" }}
         >
-          <p>{randomPhraseRef.current}!</p>
+          <p className="text-4xl text-green-800 font-bold">
+            {randomPhraseRef.current}!
+          </p>
+          <div className=" flex flex-col text-center ">
+            <p>Your Score</p> <p className="text-2xl">{props.score}</p>
+          </div>
           <Button
             type="nextLevel"
             className="text-lg text-white"
@@ -65,7 +75,7 @@ const LevelUpDialog = (props) => {
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </>
   );
 };

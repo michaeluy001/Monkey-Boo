@@ -23,7 +23,6 @@ const Board = (props) => {
   const { isLevelComplete } = useGoalTracker(clickCount, goal);
   const [isLevelUpDialogOpen, setLevelUpDialogOpen] = useState(false);
 
-
   const handleMonkeyFound = () => {
     setIsDisabled(true);
     props.onGameOver;
@@ -35,20 +34,14 @@ const Board = (props) => {
   };
 
   useEffect(() => {
-    console.log("click Count", clickCount);
-    console.log("Tile Score", tileScore);
-    console.log("Score: ", score);
-    console.log("GOAL", goal);
-  }, [score]);
-
-  useEffect(() => {
     if (isLevelComplete) {
       setIsDisabled(true);
-      setLevelUpDialogOpen(true);
+      openDialog();
     }
   }, [isLevelComplete]);
 
   const handleNextLevel = () => {
+    
     setLevelUpDialogOpen(false);
     props.onLevelUp();
     props.onReset();
@@ -56,7 +49,11 @@ const Board = (props) => {
     props.onGameScoreUpdate(score);
   };
 
-
+  const openDialog = () => {
+    setTimeout(() => {
+      setLevelUpDialogOpen(true);
+    }, 1000);
+  };
 
   return (
     <>
@@ -66,14 +63,19 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === 20}
+            isAMonkey={index === monkeyIndex}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
           />
         ))}
       </div>
-      {isLevelUpDialogOpen && <LevelUpDialog onNextLevel={handleNextLevel} />}
+      {isLevelUpDialogOpen && (
+        <LevelUpDialog
+          onNextLevel={handleNextLevel}
+          score={props.gameScore + score}
+        />
+      )}
       {isGameOver && <GameOver score={props.gameScore} level={props.level} />}
     </>
   );
