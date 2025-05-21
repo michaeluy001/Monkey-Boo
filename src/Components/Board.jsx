@@ -66,7 +66,7 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === monkeyIndex}
+            isAMonkey={index === 20}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
