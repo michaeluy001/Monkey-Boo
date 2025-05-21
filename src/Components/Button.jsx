@@ -15,7 +15,7 @@ const Button = ({
   }
 
   const baseStyle = 
-    "w-40 h-10 m-auto content-center text-center rounded-lg shadow-md/50 ring-2 hover:scale-110 transition-transform cursor-pointer"
+    "w-40 h-10 content-center text-center rounded-lg shadow-md/50 ring-2 hover:scale-110 transition-transform cursor-pointer"
   
 
 

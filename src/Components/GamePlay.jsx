@@ -1,7 +1,8 @@
 import Board from "./Board";
-import ReturnButton from "./ReturnButton";
+
 import { useState, useEffect } from "react";
 import { GameStateProvider } from "./GameContext";
+import Scoreboard from "./GamePlay-Scoreboard";
 
 const GamePlay = () => {
   const [isBoardRunning, setBoardRunning] = useState(false);
@@ -24,22 +25,24 @@ const GamePlay = () => {
 
   const reset = () => {
     setBoardRunning(false);
-  }
+  };
 
   const updateGameScore = (newScore) => {
-    setGameScore(prev=> prev + newScore)
-  }
+    setGameScore((prev) => prev + newScore);
+  };
 
   return (
     <>
       <GameStateProvider>
-        <div className="h-15 bg-amber-200 content-center items-center justify-items-center px-5 grid grid-cols-3">
-          <ReturnButton className="text-3xl" />
-          <div className="text-center">Current Score {gameScore} </div>
-          <div className="text-center flex flex-col"> <p>Level</p> <p>{level}</p> </div>
-        </div>
+        <Scoreboard gameScore={gameScore} level={level} />
         {isBoardRunning && (
-          <Board level={level} onLevelUp={handleLevelUp} onReset={reset} onGameScoreUpdate={updateGameScore} gameScore={gameScore}/>
+          <Board
+            level={level}
+            onLevelUp={handleLevelUp}
+            onReset={reset}
+            onGameScoreUpdate={updateGameScore}
+            gameScore={gameScore}
+          />
         )}
       </GameStateProvider>
     </>
