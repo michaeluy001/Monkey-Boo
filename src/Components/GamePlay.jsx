@@ -33,10 +33,10 @@ const GamePlay = () => {
   return (
     <>
       <GameStateProvider>
-        <div className="h-10 bg-amber-200 content-center px-5 grid grid-cols-3  ">
+        <div className="h-15 bg-amber-200 content-center items-center justify-items-center px-5 grid grid-cols-3">
           <ReturnButton className="text-3xl" />
-          <div className="text-center"></div>
-          <div className="text-center">Level: {level} </div>
+          <div className="text-center">Current Score {gameScore} </div>
+          <div className="text-center flex flex-col"> <p>Level</p> <p>{level}</p> </div>
         </div>
         {isBoardRunning && (
           <Board level={level} onLevelUp={handleLevelUp} onReset={reset} onGameScoreUpdate={updateGameScore} gameScore={gameScore}/>

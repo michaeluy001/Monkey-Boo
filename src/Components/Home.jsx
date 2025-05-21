@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <>
       
-        <div className="w-100 h-100 content-center justify-items-center">
+        <div className="w-100 h-screen content-center justify-items-center">
           <span className="text-5xl font-bold text-white"> Monkey Boo!</span>
           <div className="flex flex-col gap-2 m-3">
             <Button type="green" onClick={handleStartGame}>

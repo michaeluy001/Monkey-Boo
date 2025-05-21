@@ -20,10 +20,10 @@ const GameOver = (props) => {
         <div className="my-10">
           <span className="text-6xl font-bold tracking-widest ">
             Game Over!
-            Your Score: {props.score}
+            
           </span>
-         
-         {/* <GameOverForm score={props.score}/> */}
+         Your Score: {props.score}
+         <GameOverForm score={props.score} />
 
           
         </div>
