@@ -16,6 +16,7 @@ const FallingFruits = (props) => {
     const timeoutId = setTimeout(() => {
       setAnimating(false);
     }, 1000);
+    return ()=> clearTimeout(timeoutId)
   }, []);
 
   return (
@@ -28,7 +29,7 @@ const FallingFruits = (props) => {
           initial={{ top: -100, opacity: 0 }}
           animate={{ top: 100, opacity:1, rotate: 360 }}
           transition={{
-            top: { duration: 3, ease: "linear", ease: 'linear', },
+            top: { duration: 3, ease: "linear" },
             rotate: { duration: 2, repeat: Infinity, ease: "linear" },
             
           }}
