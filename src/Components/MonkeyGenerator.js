@@ -1,3 +1,4 @@
+import mockingMonkey from '/src/assets/mocking monkey.gif'
 import { useState, useEffect } from "react";
 
 const usePlaceMonkey = (numberOfTiles) => {
@@ -16,7 +17,7 @@ const useInitializeMonkey = (monkeyToInit) => {
   useEffect(() => {
     switch (monkeyToInit) {
       case "Monkeyboo":
-        setInfo({ imgSrc: "src/assets/monkey selfie.png", alt: "Monkey Boo" });
+        setInfo({ imgSrc: mockingMonkey, alt: "Monkey Boo" });
         break;
       default:
         setInfo({ imgSrc: "", alt: "Monkey Boo"  });

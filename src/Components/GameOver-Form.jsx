@@ -1,44 +1,73 @@
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
+import PostResultDialog from "./GameOver-Form-Dg";
 const GameOverForm = (props) => {
+  const [isPostSuccess, setPostSuccess] = useState(false);
+  const [isPostFail, setPostFail] = useState(false);
+
   const nav = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = {
       playerName: e.target.playerName.value,
-      score: e.target.score.value,
+      score: props.score,
     };
     try {
       await axios.post("http://localhost:3000/submit", formData);
-      console.log("Success");
-     
+      setPostSuccess(true);
+      setTimeout(() => {
+        nav("/");
+      }, 1000);
     } catch (err) {
-      console.log("Error", err);
+      setPostFail(true);
+      setTimeout(() => {
+        setPostFail(false);
+      }, 1000);
     }
-  };
-
-  const closeThisDialog = () => {
-    nav("/");
   };
 
   return (
     <>
-      <form
-        className="flex flex-col gap-2 items-center m-5"
+      <motion.form
+        className="flex flex-col gap-2 items-center my-3"
         method="POST"
         onSubmit={handleSubmit}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1, type: "spring" }}
       >
-        <input type="hidden" value={props.score} name="score" />
-        <input
-          name="playerName"
-          type="text"
-          id="input"
-          className="rounded-2xl h-10 border-2 border-green-800 ring-1 ring-green-200 px-2 placeholder:text-center"
-          placeholder="Enter Your Name"
-        />
-        <input type="submit" className="w-1/3 h-8 border-2 rounded-2xl" onClick={closeThisDialog} />
-      </form>
+        <div className="flex gap-2">
+          <motion.input
+            name="playerName"
+            type="text"
+            id="input"
+            className="rounded-2xl h-auto border-1   ring-yellow-600 px-2 placeholder:text-center focus:outline-none focus:ring-2"
+            placeholder="Enter Your Name"
+            autoComplete="off"
+            required
+            initial={{ width: 0 }}
+            animate={{ width: 200 }}
+            transition={{ duration: 0.2, delay: 1 }}
+          />
+          <button
+            type="submit"
+            className="size-auto border-2 rounded-full justify-items-center"
+          >
+            <IoIosArrowForward className="text-2xl" />
+          </button>
+        </div>
+        <AnimatePresence>
+          {isPostSuccess && <PostResultDialog>Success! </PostResultDialog>}
+          {isPostFail && (
+            <PostResultDialog className="text-lg">
+              Name Already Exists.{" "}
+            </PostResultDialog>
+          )}
+        </AnimatePresence>
+      </motion.form>
     </>
   );
 };

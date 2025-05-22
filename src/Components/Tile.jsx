@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef } from "react";
 import { useInitializeMonkey } from "./MonkeyGenerator";
 import { useGameContext } from "./GameContext";
+import monkeyGood from "/src/assets/monkey good.png";
 
 const Tile = (props) => {
   const [isAMonkey, setIsAMonkey] = useState(false);
@@ -61,9 +62,17 @@ const Tile = (props) => {
 
         <div>
           {!isAMonkey ? (
-            <motion.img src="src/assets/gold coins.png" alt="gold coins" />
+            <motion.div className="bg-green-600">
+              <motion.img
+                src={monkeyGood}
+                alt="monkey good"
+                className="w-50 h-30 object-cover "
+              />
+            </motion.div>
           ) : (
-            <img src={monkeyInfo.imgSrc} alt={monkeyInfo.alt} />
+            <div className="">
+              <img src={monkeyInfo.imgSrc} alt={monkeyInfo.alt} />
+            </div>
           )}
         </div>
       </motion.div>

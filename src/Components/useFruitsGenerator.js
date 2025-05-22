@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import {shuffle} from "./GameUtility";
+import banana from '/src/assets/banana.png'
+import grapes from '/src/assets/grapes.png'
+import strawberry from '/src/assets/strawberry.png'
+
 
 const useFruitsGenerator = (numberOfTiles) => {
   const [fruitBasket, setFruitBasket] = useState([]);
@@ -20,19 +24,19 @@ const useFruitsGenerator = (numberOfTiles) => {
         {
           name: "Banana",
           pts: 1,
-          imgSrc: "src/assets/banana.png",
+          imgSrc: banana,
           qty: fruit1,
         },
         {
           name: "Grapes",
           pts: 3,
-          imgSrc: "src/assets/grapes.png", 
+          imgSrc: grapes,
           qty: fruit2,
         },
         {
           name: "Strawberry",
           pts: 5,
-          imgSrc: "src/assets/strawberry.png",
+          imgSrc: strawberry,
           qty: fruit3,
         },
       ];

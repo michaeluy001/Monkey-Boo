@@ -1,18 +1,19 @@
-
 import { useNavigate } from "react-router";
-import { MdHome } from "react-icons/md";
+import { GrReturn } from "react-icons/gr";
 
-const ReturnButton = ({ className = "" }) => {
+const ReturnButton = ({ className = "", children }) => {
   const nav = useNavigate();
 
   const returnHome = () => {
-    nav("/");
+    setTimeout(() => {
+      nav("/");
+    }, 500);
   };
 
   return (
     <>
       <div onClick={returnHome} className={className}>
-        <MdHome /> 
+        {!children ? <GrReturn /> : children}
       </div>
     </>
   );

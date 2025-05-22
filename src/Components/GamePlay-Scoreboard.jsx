@@ -11,8 +11,8 @@ const Scoreboard = (props) => {
         transition={{ duration: 0.5 }}
       >
         <ReturnButton className="text-3xl" />
-        <div className="text-center">
-          Current Score <span className="text-3xl">{props.gameScore}</span>
+        <div className="text-center text-sm">
+          Current Score <p className="text-lg">{props.gameScore}</p>
         </div>
         <div className="text-center flex flex-col">
          
