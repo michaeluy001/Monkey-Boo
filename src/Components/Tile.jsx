@@ -70,7 +70,7 @@ const Tile = (props) => {
               />
             </motion.div>
           ) : (
-            <div className="bg-amber-700">
+            <div className="">
               <img src={monkeyInfo.imgSrc} alt={monkeyInfo.alt} />
             </div>
           )}

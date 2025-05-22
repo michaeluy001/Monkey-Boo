@@ -3,6 +3,7 @@ import { FallingFruits } from "./Animation";
 import Button from "./Button";
 import dancingMonkey from "/src/assets/dancing monkey.gif";
 import { motion } from "motion/react";
+import DialogOverlay from "./DialogOverlay";
 
 const LevelUpDialog = (props) => {
   const [fruits, setFruits] = useState([]);
@@ -32,49 +33,44 @@ const LevelUpDialog = (props) => {
 
   return (
     <>
+      <DialogOverlay timeout={0} duration={0.3} />
+
       <motion.div
-        className="bg-amber-300/50 h-screen  w-full  fixed top-0 left-0 flex items-center overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        className=" fixed left-0  top-1/2 -translate-y-1/2 bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-75 w-full justify-center items-center space-y-5"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3, delay: 0.5, type: "spring" }}
       >
-        <motion.div
-          className="relative bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-2/3 w-full justify-center items-center space-y-5"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1, delay: 1, type: "spring" }}
+        <p className="text-4xl text-green-800 font-bold">
+          {randomPhraseRef.current}!
+        </p>
+        <div className=" flex flex-col text-center ">
+          <p>Your Score</p> <p className="text-2xl">{props.score}</p>
+        </div>
+        <Button
+          type="nextLevel"
+          className="text-lg text-white"
+          onClick={handleNext}
         >
-          <p className="text-4xl text-green-800 font-bold">
-            {randomPhraseRef.current}!
-          </p>
-          <div className=" flex flex-col text-center ">
-            <p>Your Score</p> <p className="text-2xl">{props.score}</p>
-          </div>
-          <Button
-            type="nextLevel"
-            className="text-lg text-white"
-            onClick={handleNext}
-          >
-            Next Level
-          </Button>
+          Next Level
+        </Button>
 
-          <div className="size-30 bottom-0 right-0 absolute">
-            <motion.img
-              src={dancingMonkey}
-              alt="Dancing Monkey"
-              className="absolute bottom-0 right-100"
-              initial={{ right: 300 }}
-              animate={{ right: 0 }}
-              transition={{ duration: 2, type: "spring" }}
-            />
+        <div className="size-30 bottom-0 right-0 absolute">
+          <motion.img
+            src={dancingMonkey}
+            alt="Dancing Monkey"
+            className="absolute bottom-0 right-100"
+            initial={{ right: 300 }}
+            animate={{ right: 0 }}
+            transition={{ duration: 2, type: "spring" }}
+          />
 
-            <div className="overflow-hidden w-full">
-              {fruits.map((fruit) => (
-                <FallingFruits key={fruit.id} id={fruit.id} />
-              ))}
-            </div>
+          <div className="overflow-hidden w-full">
+            {fruits.map((fruit) => (
+              <FallingFruits key={fruit.id} id={fruit.id} />
+            ))}
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </>
   );

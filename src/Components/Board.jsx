@@ -77,6 +77,7 @@ const Board = (props) => {
         />
       )}
       {isGameOver && <GameOver score={props.gameScore} level={props.level} />}
+      {/* <GameOver score={props.gameScore} level={props.level} /> */}
     </>
   );
 };
