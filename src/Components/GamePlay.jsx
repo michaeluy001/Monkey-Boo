@@ -7,7 +7,7 @@ import Scoreboard from "./GamePlay-Scoreboard";
 const GamePlay = () => {
   const [isBoardRunning, setBoardRunning] = useState(false);
   const [gameScore, setGameScore] = useState(0);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(5);
 
   const handleLevelUp = () => {
     setLevel(level + 1);

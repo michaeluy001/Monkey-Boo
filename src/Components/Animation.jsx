@@ -1,5 +1,5 @@
 import banana from "/src/assets/banana.png";
-import { motion, useAnimate, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 
 const FallingFruits = (props) => {
@@ -29,9 +29,9 @@ const FallingFruits = (props) => {
           initial={{ top: -100, opacity: 0 }}
           animate={{ top: 100, opacity:1, rotate: 360 }}
           transition={{
-            top: { duration: 3, ease: "linear" },
-            rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-            
+            top: { duration: 2, },
+            rotate: { duration: 2, repeat: Infinity,},
+            ease: "linear"
           }}
         >
           <img src={banana} className="size-10" />

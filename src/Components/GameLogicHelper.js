@@ -8,38 +8,30 @@ const levelGoalMap = {
   5: 8,
 };
 
+const maxLevel = Object.keys(levelGoalMap).length;
+
 const useLevelHandler = (level) => {
   const [goal, setGoal] = useState(levelGoalMap[level]);
-
   useEffect(() => {
     setGoal(levelGoalMap[level]);
   }, [level]);
-
-  return { goal };
+  return { goal, maxLevel };
 };
 
 const useGoalTracker = (clickCount, goal) => {
   const [isLevelComplete, setIsLevelComplete] = useState(false);
-
   useEffect(() => {
-    try {
-      if (clickCount >= goal) setIsLevelComplete(true);
-    } catch (err) {
-      console.log("Error", err);
-    }
-    if (isLevelComplete) console.log("Winner");
+ 
+    if (clickCount >= goal) setIsLevelComplete(true);
   }, [clickCount]);
-
   return { isLevelComplete, setIsLevelComplete };
 };
 
 const useClickCounter = (score) => {
   const [clickCount, setClickCount] = useState(0);
-
   useEffect(() => {
     if (score) setClickCount(clickCount + 1);
   }, [score]);
-
   return { clickCount };
 };
 

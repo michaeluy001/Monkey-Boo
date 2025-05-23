@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import PostResultDialog from "./GameOver-Form-Dg";
-const GameOverForm = (props) => {
+import PostResultDialog from "./GameFinishedForm-Dg";
+const GameFinishedForm = (props) => {
   const [isPostSuccess, setPostSuccess] = useState(false);
   const [isPostFail, setPostFail] = useState(false);
 
@@ -15,6 +15,7 @@ const GameOverForm = (props) => {
       playerName: e.target.playerName.value,
       score: props.score,
     };
+
     try {
       await axios.post("http://localhost:3000/submit", formData);
       setPostSuccess(true);
@@ -37,7 +38,7 @@ const GameOverForm = (props) => {
         onSubmit={handleSubmit}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1, type: "spring" }}
+        transition={{ duration: 1, delay: 1.5, type: "spring" }}
       >
         <div className="flex gap-2">
           <motion.input
@@ -60,15 +61,22 @@ const GameOverForm = (props) => {
           </button>
         </div>
         <AnimatePresence>
-          {isPostSuccess && <PostResultDialog>Success! </PostResultDialog>}
-          {isPostFail && (
-            <PostResultDialog className="text-lg">
-              Name Already Exists.{" "}
-            </PostResultDialog>
-          )}
+          <div className="items-center w-full content-center text-center text-2xl ">
+            {isPostSuccess && (
+              <PostResultDialog className="text-green-600/60 bg-amber-300 ">
+                Success!{" "}
+              </PostResultDialog>
+            )}
+            {isPostFail && (
+              <PostResultDialog className="text-red-600/60 bg-amber-300 shadow-lg shadow-yellow-800/50">
+                Name Already Exists.
+              </PostResultDialog>
+            )}
+  
+          </div>
         </AnimatePresence>
       </motion.form>
     </>
   );
 };
-export default GameOverForm;
+export default GameFinishedForm;

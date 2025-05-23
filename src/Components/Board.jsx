@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import Tile from "./Tile";
 import useFruitsGenerator from "./useFruitsGenerator.js";
 import { usePlaceMonkey } from "./MonkeyGenerator.js";
@@ -17,19 +17,19 @@ const Board = (props) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [score, setScore] = useState(0);
   const { isGameOver } = useGameContext(false);
-  const [tileScore, setTileScore] = useState(0);
   const { clickCount } = useClickCounter(score);
-  const { goal } = useLevelHandler(props.level);
+  const { goal} = useLevelHandler(props.level);
   const { isLevelComplete } = useGoalTracker(clickCount, goal);
   const [isLevelUpDialogOpen, setLevelUpDialogOpen] = useState(false);
 
+
   const handleMonkeyFound = () => {
     setIsDisabled(true);
-    props.onGameOver;
+    // props.onGameOver; for deletion
   };
 
   const updateScore = (newScr) => {
-    setTileScore(newScr);
+    // setTileScore(newScr); for deletion
     setScore(score + newScr);
   };
 
@@ -41,7 +41,6 @@ const Board = (props) => {
   }, [isLevelComplete]);
 
   const handleNextLevel = () => {
-    
     setLevelUpDialogOpen(false);
     props.onLevelUp();
     props.onReset();
@@ -55,6 +54,8 @@ const Board = (props) => {
     }, 1000);
   };
 
+
+
   return (
     <>
       <div className="grid grid-cols-3 m-auto justify-items-center">
@@ -63,7 +64,7 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === monkeyIndex}
+            isAMonkey={index === 0}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
@@ -74,10 +75,11 @@ const Board = (props) => {
         <LevelUpDialog
           onNextLevel={handleNextLevel}
           score={props.gameScore + score}
+          level={props.level}
         />
       )}
       {isGameOver && <GameOver score={props.gameScore} level={props.level} />}
-      {/* <GameOver score={props.gameScore} level={props.level} /> */}
+
     </>
   );
 };

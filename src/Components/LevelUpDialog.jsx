@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { FallingFruits } from "./Animation";
 import Button from "./Button";
-import dancingMonkey from "/src/assets/dancing monkey.gif";
 import { motion } from "motion/react";
 import DialogOverlay from "./DialogOverlay";
+import { useLevelHandler } from "./GameLogicHelper";
+import MonkeyWonOverlay from "./MonkeyWonOverlay";
+import GameFinishedForm from "./GameFinishedForm";
+import HomeButton from "./HomeButton";
+import DialogScore from "./Dialog-Score";
 
 const LevelUpDialog = (props) => {
-  const [fruits, setFruits] = useState([]);
+  const { maxLevel } = useLevelHandler();
+  const delay = 0.5;
+
+  const [isGameFinished, setGameFinished] = useState(false);
 
   const phrases = [
     "Awesome",
@@ -24,53 +30,43 @@ const LevelUpDialog = (props) => {
   };
 
   useEffect(() => {
-    let count = 0;
-    const intervalId = setInterval(() => {
-      setFruits((prev) => [...prev, { id: count++ }]);
-    }, 300);
-    return () => clearInterval(intervalId);
-  }, []);
+    if (props.level >= maxLevel) {
+      setGameFinished(true);
+    }
+  }, [props.level]);
 
   return (
     <>
       <DialogOverlay timeout={0} duration={0.3} />
 
       <motion.div
-        className=" fixed left-0  top-1/2 -translate-y-1/2 bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-75 w-full justify-center items-center space-y-5"
+        className="fixed left-0  top-1/2 -translate-y-1/2 bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-75 w-full justify-center content-center items-center space-y-5 overflow-hidden rounded-4xl"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.5, type: "spring" }}
+        transition={{ duration: 2, delay: delay, type: "spring" }}
       >
         <p className="text-4xl text-green-800 font-bold">
           {randomPhraseRef.current}!
         </p>
-        <div className=" flex flex-col text-center ">
-          <p>Your Score</p> <p className="text-2xl">{props.score}</p>
-        </div>
-        <Button
-          type="nextLevel"
-          className="text-lg text-white"
-          onClick={handleNext}
-        >
-          Next Level
-        </Button>
 
-        <div className="size-30 bottom-0 right-0 absolute">
-          <motion.img
-            src={dancingMonkey}
-            alt="Dancing Monkey"
-            className="absolute bottom-0 right-100"
-            initial={{ right: 300 }}
-            animate={{ right: 0 }}
-            transition={{ duration: 2, type: "spring" }}
-          />
+        <DialogScore score={props.score} delayTime={delay}/>
+  
+       
+        {!isGameFinished ? (
+          <Button
+            type="nextLevel"
+            className="text-lg text-white"
+            onClick={handleNext}
+          >
+            Next Level
+          </Button>
+        ) : (
+          <GameFinishedForm score={props.score} />
+        )}
 
-          <div className="overflow-hidden w-full">
-            {fruits.map((fruit) => (
-              <FallingFruits key={fruit.id} id={fruit.id} />
-            ))}
-          </div>
-        </div>
+        {isGameFinished && <MonkeyWonOverlay />}
+
+        <HomeButton className="absolute -left-5 -bottom-5 bg-green-600 size-20" />
       </motion.div>
     </>
   );
