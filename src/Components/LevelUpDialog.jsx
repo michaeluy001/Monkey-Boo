@@ -40,7 +40,7 @@ const LevelUpDialog = (props) => {
       <DialogOverlay timeout={0} duration={0.3} />
 
       <motion.div
-        className="fixed left-0  top-1/2 -translate-y-1/2 bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-75 w-full justify-center content-center items-center space-y-5 overflow-hidden rounded-4xl"
+        className="fixed left-0  top-1/2 -translate-y-1/2 bg-amber-100 border-y-2 border-amber-600 flex flex-col  h-75 w-full justify-center content-center items-center space-y-5 overflow-hidden rounded-4xl text-yellow-700"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2, delay: delay, type: "spring" }}

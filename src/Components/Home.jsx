@@ -1,6 +1,8 @@
 import Button from "./Button";
 import { useNavigate } from "react-router";
 
+import GameObjective from "./HowToPlay";
+
 const Home = () => {
   const nav = useNavigate();
 
@@ -14,19 +16,20 @@ const Home = () => {
 
   return (
     <>
-      
-        <div className="w-100 h-screen content-center justify-items-center">
-          <span className="text-5xl font-bold text-white"> Monkey Boo!</span>
-          <div className="flex flex-col gap-2 m-3">
-            <Button type="green" onClick={handleStartGame}>
-              <span className="text-white"> Start Game </span>
-            </Button>
-            <Button type="yellow" onClick={handleScoreBoard}>
-              <span className="text-white"> LeaderBoard </span>
-            </Button>
-          </div>
+      <div className="w-full h-auto bg-yellow-800  content-center justify-items-center p-5 rounded-4xl inset-shadow-sm inset-shadow-yellow-600/80 space-y-5">
+        <p className="text-5xl py-5 font-bold text-white text-shadow-md text-shadow-yellow-400">
+          Monkey Boo!
+        </p>
+        <div className="flex flex-col gap-2 m-3">
+          <Button type="green" onClick={handleStartGame}>
+            <span className="text-white"> Start Game </span>
+          </Button>
+          <Button type="yellow" onClick={handleScoreBoard}>
+            <span className="text-white"> LeaderBoard </span>
+          </Button>
         </div>
-     
+      </div>
+      <GameObjective />
     </>
   );
 };

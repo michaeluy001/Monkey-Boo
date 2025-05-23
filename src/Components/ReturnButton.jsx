@@ -12,8 +12,8 @@ const ReturnButton = ({ className = "", children }) => {
 
   return (
     <>
-      <div onClick={returnHome} className={className}>
-        {!children ? <GrReturn /> : children}
+      <div onClick={returnHome} className={`${className} `}>
+        {!children ? <GrReturn className="active:scale-90"/> : children}
       </div>
     </>
   );
