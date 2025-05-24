@@ -45,9 +45,23 @@ const LevelUpDialog = (props) => {
         animate={{ scale: 1 }}
         transition={{ duration: 1, delay: delay, type: "spring" }}
       >
-        <p className="text-4xl text-green-800 font-bold">
-          {randomPhraseRef.current}!
-        </p>
+        {isGameFinished && (
+          <p className="text-3xl text-green-800 font-bold text-center p-2">
+            You are the king of the jungle!
+          </p>
+        )}
+        {!isGameFinished && (
+          <motion.div
+            className="text-xs text-yellow-800 font-bold text-center fixed top-5 right-5 rotate-15 rounded-full bg-yellow-300 size-23 content-center justify-items-center "
+            initial={{ scale: 5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, type: "spring", delay: 1 }}
+          >
+            <p className="flex">
+              Round <br /> Complete!
+            </p>
+          </motion.div>
+        )}
 
         <DialogScore score={props.score} delayTime={delay} />
 
@@ -75,7 +89,7 @@ export const NextLevelButton = ({ level, onNextLevel }) => {
         transition={{ delay: 1 }}
         onClick={onNextLevel}
       >
-        <p className="">Level {level + 1}</p>
+        <p className="">Round {level + 1}</p>
         <TbPlayerTrackNextFilled className="text-green-800" />
       </motion.div>
     </>
