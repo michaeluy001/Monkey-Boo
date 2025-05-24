@@ -59,7 +59,7 @@ const Tile = (props) => {
   return (
     <>
       <motion.div
-        className="relative bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden"
+        className="relative bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden cursor-pointer"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.8, type: "spring" }}
