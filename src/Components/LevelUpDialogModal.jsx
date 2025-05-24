@@ -15,7 +15,9 @@ const LevelUpDialog = (props) => {
   const [isGameFinished, setGameFinished] = useState(false);
 
   const handleNext = () => {
-    props.onNextLevel();
+    setTimeout(() => {
+      props.onNextLevel();
+    }, 300);
   };
 
   useEffect(() => {
@@ -72,14 +74,14 @@ export const NextLevelButton = ({ level, onNextLevel }) => {
   return (
     <>
       <motion.div
-        className="text-md text-yellow-800 flex gap-2 items-center text-center border rounded-2xl p-2 shadow shadow-yellow-800"
+        className="text-md text-yellow-800 flex gap-2 items-center text-center border rounded-2xl p-2 shadow shadow-yellow-800 cursor-pointer hover:bg-yellow-800 hover:text-yellow-200 transition duration-300 active:scale-90 hover:scale-110"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
         onClick={onNextLevel}
       >
         <p className="">Round {level + 1}</p>
-        <TbPlayerTrackNextFilled className="text-green-800" />
+        <TbPlayerTrackNextFilled />
       </motion.div>
     </>
   );
