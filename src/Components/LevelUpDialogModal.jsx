@@ -7,16 +7,24 @@ import GameFinishedForm from "./GameFinishedForm";
 import HomeButton from "./HomeButton";
 import DialogScore from "./Dialog-Score";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
+import levelClear from "/src/assets/level-clear.mp3";
+import gameWon from "/src/assets/you won.wav";
+import useSound from "use-sound";
 
 const LevelUpDialog = (props) => {
   const { maxLevel } = useLevelHandler();
+  const [playLevelClear, { sound }] = useSound(levelClear);
+  const [playGameWon] = useSound(gameWon);
+  const [isModalClosed, setIsModelClosed] = useState(false);
   const delay = 0.5;
 
   const [isGameFinished, setGameFinished] = useState(false);
 
   const handleNext = () => {
+    handleFadeOut();
     setTimeout(() => {
       props.onNextLevel();
+      stop();
     }, 300);
   };
 
@@ -25,6 +33,21 @@ const LevelUpDialog = (props) => {
       setGameFinished(true);
     }
   }, [props.level]);
+
+  useEffect(() => {
+    playLevelClear();
+    if (isGameFinished) playGameWon();
+  });
+
+  const handleFadeOut = () => {
+    if (sound) {
+      sound.fade(sound.volume(), 0, 1500);
+      setTimeout(() => {
+        sound.stop();
+        sound.volume(1);
+      }, 1500);
+    }
+  };
 
   return (
     <>

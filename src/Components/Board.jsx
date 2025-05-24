@@ -25,11 +25,9 @@ const Board = (props) => {
 
   const handleMonkeyFound = () => {
     setIsDisabled(true);
-    // props.onGameOver; for deletion
   };
 
   const updateScore = (newScr) => {
-    // setTileScore(newScr); for deletion
     setScore(score + newScr);
   };
 
@@ -64,7 +62,7 @@ const Board = (props) => {
             id={index}
             key={index}
             fruit={item}
-            isAMonkey={index === 0}
+            isAMonkey={index === monkeyIndex}
             onDisable={isDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}

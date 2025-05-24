@@ -4,13 +4,17 @@ import { useState, useEffect } from "react";
 import HomeButton from "./HomeButton";
 import { motion, AnimatePresence } from "motion/react";
 import DialogScore from "./Dialog-Score";
+import gameOverSound from "/src/assets/gameover.mp3";
+import useSound from "use-sound";
 
 const GameOver = (props) => {
   const [isFormShown, setFormShown] = useState(false);
   const [isLabelShown, setLabelShown] = useState(true);
+  const [playGameOverSound] = useSound(gameOverSound);
   const delay = 2;
 
   useEffect(() => {
+    
     const timeId = setTimeout(() => {
       setFormShown(true);
     }, 1000);
@@ -23,6 +27,10 @@ const GameOver = (props) => {
     }, 1000);
     return () => clearInterval(timeId);
   }, []);
+
+  // useEffect(()=> {
+  //   if(isFormShown) playGameOverSound();
+  // },[isFormShown])
 
   return (
     <>

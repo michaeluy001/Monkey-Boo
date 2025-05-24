@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from "react";
 import { useInitializeMonkey } from "./MonkeyGenerator";
 import { useGameContext } from "./GameContext";
 import monkeyGood from "/src/assets/monkey good.png";
+import useSound from 'use-sound'
+import pop from '/src/assets/pop.mp3';
 
 const Tile = (props) => {
   const [isAMonkey, setIsAMonkey] = useState(false);
@@ -12,6 +14,7 @@ const Tile = (props) => {
   const monkeyInfo = useInitializeMonkey("Monkeyboo");
   const wasClickedRef = useRef(false);
   const [isPopupShown, setPopupshown] = useState(false);
+  const [play] = useSound(pop);
 
   const handleClick = () => {
     if (props.onDisable) return;
@@ -47,6 +50,10 @@ const Tile = (props) => {
       setPopupshown(false);
     }, 1000);
   };
+
+  useEffect(()=> {
+    play();
+  },[wasClickedRef.current])
 
   return (
     <>
