@@ -16,7 +16,6 @@ const Tile = (props) => {
   const handleClick = () => {
     if (props.onDisable) return;
     handlePlayerChoice();
-
     setIsFruitVisible(false);
   };
 
@@ -28,6 +27,7 @@ const Tile = (props) => {
     if (!wasClickedRef.current) {
       generateScore(fruit.pts);
       wasClickedRef.current = true;
+      showPopup();
     }
   };
 
@@ -41,19 +41,25 @@ const Tile = (props) => {
     setIsGameOver(true);
   };
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setPopupshown(true);
+  //   const timeoutId = setTimeout(() => {
+  //     setPopupshown(false);
+  //   }, 1000);
+  //   return () => clearTimeout(timeoutId);
+  // }, [wasClickedRef.current]);
+
+  const showPopup = () => {
     setPopupshown(true);
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       setPopupshown(false);
     }, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [wasClickedRef.current]);
+  };
 
   return (
     <>
-      
       <motion.div
-        className=" bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden"
+        className="relative bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.8, type: "spring" }}
@@ -86,21 +92,20 @@ const Tile = (props) => {
             </div>
           )}
         </div>
-        
-        {/* <AnimatePresence>
+
+        <AnimatePresence>
           {isPopupShown && (
             <motion.p
               key="key"
-              className="fixed top-10 -right-2 text-lg size-10 text-white "
-              initial={{ top: "10px", opacity: 0 }}
-              animate={{ top: "-10px", opacity: 1 }}
-              transition={{ duration: 1 }}
+              className="absolute top-10 right-2 text-lg size-10 text-white bg-yellow-500 rounded-full opacity-1 content-center "
+              initial={{ top: "25%", opacity: 1 }}
+              animate={{ top: "1%", opacity: 0 }}
+              transition={{ duration: 0.5 }}
             >
               +{fruit.pts}
             </motion.p>
           )}
-        </AnimatePresence> */}
-    
+        </AnimatePresence>
       </motion.div>
     </>
   );
