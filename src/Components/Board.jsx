@@ -58,7 +58,7 @@ const Board = (props) => {
 
   return (
     <>
-      <div className="grid grid-cols-3 m-auto justify-items-center">
+      <div className="grid grid-cols-3 m-auto justify-items-center max-w-[450px]">
         {fruits.map((item, index) => (
           <Tile
             id={index}
