@@ -17,7 +17,7 @@ const GameObjective = () => {
       </div>
       {isOpen && (
         <motion.div
-          className="absolute top-1/2 left-1/2 h-2/3 -translate-1/2 w-full text-justify px-10 py-5 bg-yellow-500 rounded-3xl transition max-w-[700px]"
+          className="absolute top-1/2 left-1/2  -translate-1/2 w-full text-justify px-10 py-5 bg-yellow-500 rounded-3xl transition max-w-[700px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, ease: "linear" }}
