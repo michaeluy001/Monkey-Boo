@@ -14,17 +14,6 @@ const LevelUpDialog = (props) => {
 
   const [isGameFinished, setGameFinished] = useState(false);
 
-  const phrases = [
-    "Awesome",
-    "Extraordinary",
-    "Excellent",
-    "Good Job",
-    `That's Perfect`,
-  ];
-  const randomPhraseRef = useRef(
-    phrases[Math.floor(Math.random() * phrases.length)]
-  );
-
   const handleNext = () => {
     props.onNextLevel();
   };
