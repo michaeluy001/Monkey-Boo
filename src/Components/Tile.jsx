@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useInitializeMonkey } from "./MonkeyGenerator";
 import { useGameContext } from "./GameContext";
 import monkeyGood from "/src/assets/monkey good.png";
@@ -11,10 +11,12 @@ const Tile = (props) => {
   const [isFruitVisible, setIsFruitVisible] = useState(true);
   const monkeyInfo = useInitializeMonkey("Monkeyboo");
   const wasClickedRef = useRef(false);
+  const [isPopupShown, setPopupshown] = useState(false);
 
   const handleClick = () => {
     if (props.onDisable) return;
     handlePlayerChoice();
+
     setIsFruitVisible(false);
   };
 
@@ -39,10 +41,19 @@ const Tile = (props) => {
     setIsGameOver(true);
   };
 
+  useEffect(() => {
+    setPopupshown(true);
+    const timeoutId = setTimeout(() => {
+      setPopupshown(false);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [wasClickedRef.current]);
+
   return (
     <>
+      
       <motion.div
-        className="bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden"
+        className=" bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.8, type: "spring" }}
@@ -75,6 +86,21 @@ const Tile = (props) => {
             </div>
           )}
         </div>
+        
+        {/* <AnimatePresence>
+          {isPopupShown && (
+            <motion.p
+              key="key"
+              className="fixed top-10 -right-2 text-lg size-10 text-white "
+              initial={{ top: "10px", opacity: 0 }}
+              animate={{ top: "-10px", opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              +{fruit.pts}
+            </motion.p>
+          )}
+        </AnimatePresence> */}
+    
       </motion.div>
     </>
   );

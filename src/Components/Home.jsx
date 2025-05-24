@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useNavigate } from "react-router";
 
-import GameObjective from "./HowToPlay";
+import About from "./About";
 
 const Home = () => {
   const nav = useNavigate();
@@ -29,7 +29,7 @@ const Home = () => {
           </Button>
         </div>
       </div>
-      <GameObjective />
+      <About />
     </>
   );
 };

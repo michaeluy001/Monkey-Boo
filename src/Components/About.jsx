@@ -12,22 +12,24 @@ const GameObjective = () => {
 
   return (
     <>
-      <div className="fixed top-25 left-5 rounded-full bg-yellow-500 size-10 content-center justify-items-center text-3xl text-green-900">
+      <div className="fixed top-25 left-5 rounded-full bg-yellow-500 size-10 content-center justify-items-center text-3xl text-green-900 active:scale-90 transition-transform">
         <FaInfoCircle onClick={handleToggle} />
       </div>
       {isOpen && (
         <motion.div
           className="absolute top-1/2 h-2/3 -translate-y-1/2 w-auto text-justify px-10 py-5 bg-yellow-500 rounded-3xl m-5 transition "
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1}}
-          transition={{duration: 0.3, ease:'linear'}}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
         >
           {" "}
           <p className="flex justify-end text-2xl my-2 z-2">
             <IoMdClose onClick={handleToggle} />
           </p>
           <div className="overflow-scroll h-90 text-yellow-900">
-            <p className="my-5 text-lg text-green-900 font-bold">Game Objective</p>
+            <p className="my-5 text-lg text-green-900 font-bold">
+              Game Objective
+            </p>
             <p className="">
               The game is simple and fun! Your objective is to collect a
               specific number of fruits in each level — but watch out for
@@ -36,7 +38,9 @@ const GameObjective = () => {
               toes. Each type of fruit carries a different point value, so
               choose wisely and move quickly!
             </p>
-            <p className="my-5 text-lg text-green-900 font-bold">About The Game</p>
+            <p className="my-5 text-lg text-green-900 font-bold">
+              About The Game
+            </p>
             <p className="">
               This game is my personal project, I started this with one goal in
               mind - TO LEARN. I have faced several challenges in terms of

@@ -9,7 +9,7 @@ import {
   useLevelHandler,
   useClickCounter,
 } from "./GameLogicHelper.js";
-import LevelUpDialog from "./LevelUpDialog.jsx";
+import LevelUpDialog from "./LevelUpDialogModal.jsx";
 
 const Board = (props) => {
   const fruits = useFruitsGenerator(9);
