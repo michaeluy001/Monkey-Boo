@@ -17,7 +17,7 @@ const GameFinishedForm = (props) => {
     };
 
     try {
-      await axios.post("http://localhost:3000/submit", formData);
+      await axios.post("https://monkey-boo-server.onrender.com/submit", formData);
       setPostSuccess(true);
       setTimeout(() => {
         nav("/");

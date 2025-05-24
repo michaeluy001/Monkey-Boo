@@ -12,7 +12,7 @@ const LeaderBoard = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const result = await axios.get("http://localhost:3000");
+        const result = await axios.get("https://monkey-boo-server.onrender.com/");
         setPlayers(result.data);
       } catch (err) {
         console.error("Error fetching players", err);
