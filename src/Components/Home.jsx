@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full h-auto bg-yellow-800  content-center justify-items-center p-5 rounded-4xl inset-shadow-sm inset-shadow-yellow-600/80 space-y-5">
+      <div className="w-full h-auto m-auto bg-yellow-800  content-center justify-items-center p-5 rounded-4xl inset-shadow-sm inset-shadow-yellow-600/80 space-y-5 sm:w-2/3 md:w-1/2 xl:w-1/3">
         <p className="text-5xl py-5 font-bold text-white text-shadow-md text-shadow-yellow-400">
           Monkey Boo!
         </p>
