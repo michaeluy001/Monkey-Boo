@@ -31,7 +31,7 @@ const HomeButton = ({ className = "" }) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p className="flex justify-end w-full" onClick={() => setEnlarged(false)}>
+          <p className="flex justify-end w-full cursor-pointer text-2xl" onClick={() => setEnlarged(false)}>
             <IoMdClose />
           </p>
           <p>Your progress will not be saved. Return to the Main Menu?</p>
