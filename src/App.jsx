@@ -6,11 +6,10 @@ import AppRoutes from "./Routes/AppRoutes";
 const App = () => {
   return (
     <>
-      
-        <BrowserRouter>
+        <BrowserRouter basename="/Monkey-Boo/">
           <AppRoutes />
         </BrowserRouter>
-     
+
     </>
   );
 };

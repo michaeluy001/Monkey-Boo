@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <>
       <Header />
-        <div className="h-screen overflow-hidden content-center">
+        <div className="h-dvh overflow-hidden content-center">
         <Outlet />
         </div>
       <Footer />
