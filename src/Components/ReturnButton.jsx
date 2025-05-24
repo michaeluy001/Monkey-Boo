@@ -14,7 +14,7 @@ const ReturnButton = ({ className = "", children }) => {
   return (
     <>
       <div onClick={returnHome} className={`${className} ${baseStyle}`}>
-        {!children ? <GrReturn className="active:scale-90 "/> : children}
+        {!children ? <GrReturn className="active:scale-90 hover:scale-110 transition-transform "/> : children}
       </div>
     </>
   );
