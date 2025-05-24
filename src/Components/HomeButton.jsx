@@ -6,7 +6,7 @@ import { MdHome } from "react-icons/md";
 const HomeButton = ({ className = "" }) => {
   const [isEnlarged, setEnlarged] = useState(false);
   const floatingButtonStyle =
-    "rounded-full content-center justify-items-center transition-transform  hover:scale-110";
+    "rounded-full content-center justify-items-center transition-transform";
 
   const handleToggle = () => {
     if (isEnlarged) return;
