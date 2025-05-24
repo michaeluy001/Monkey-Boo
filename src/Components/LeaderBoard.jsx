@@ -46,7 +46,7 @@ const LeaderBoard = () => {
         </div>
 
         <div className="h-80 p-5 ">
-          <ul className="w-full rounded-2xl  overflow-y-scroll  h-full  bg-green-400/30 inset-shadow-sm inset-shadow-green-800 ">
+          <ul className="w-full rounded-2xl  overflow-y-scroll   h-full  bg-green-400/30 inset-shadow-sm inset-shadow-green-800 ">
             {players.map((player, index) => (
               <li
                 key={index}
