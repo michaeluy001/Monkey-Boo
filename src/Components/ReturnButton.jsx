@@ -3,6 +3,7 @@ import { GrReturn } from "react-icons/gr";
 
 const ReturnButton = ({ className = "", children }) => {
   const nav = useNavigate();
+  const baseStyle='cursor-pointer';
 
   const returnHome = () => {
     setTimeout(() => {
@@ -12,8 +13,8 @@ const ReturnButton = ({ className = "", children }) => {
 
   return (
     <>
-      <div onClick={returnHome} className={`${className} `}>
-        {!children ? <GrReturn className="active:scale-90"/> : children}
+      <div onClick={returnHome} className={`${className} ${baseStyle}`}>
+        {!children ? <GrReturn className="active:scale-90 "/> : children}
       </div>
     </>
   );
