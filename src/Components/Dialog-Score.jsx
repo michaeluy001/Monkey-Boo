@@ -7,7 +7,7 @@ const DialogScore = ({ score, delayTime }) => {
         className=" flex flex-col text-center "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{duration: 1, delay: delayTime + 1, duration: 0.3, type: "spring" }}
+        transition={{duration: 1, delay: delayTime + 1, type: "spring" }}
       >
         <p>Your Score</p>{" "}
         <motion.p
