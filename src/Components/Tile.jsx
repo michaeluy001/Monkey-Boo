@@ -41,14 +41,6 @@ const Tile = (props) => {
     setIsGameOver(true);
   };
 
-  // useEffect(() => {
-  //   setPopupshown(true);
-  //   const timeoutId = setTimeout(() => {
-  //     setPopupshown(false);
-  //   }, 1000);
-  //   return () => clearTimeout(timeoutId);
-  // }, [wasClickedRef.current]);
-
   const showPopup = () => {
     setPopupshown(true);
     setTimeout(() => {
@@ -59,10 +51,10 @@ const Tile = (props) => {
   return (
     <>
       <motion.div
-        className="relative bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden cursor-pointer"
+        className={`relative bg-amber-50 rounded-xl h-30 w-30 text-center content-center m-1 border-2 border-amber-100 overflow-hidden  ${!wasClickedRef.current && "hover:scale-105 cursor-pointer"} transition-transform `}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.8, type: "spring" }}
+        transition={{ duration: 0.01, type: "spring" }}
         onClick={handleClick}
       >
         <AnimatePresence>
@@ -71,8 +63,10 @@ const Tile = (props) => {
               key="picture"
               src={fruit.imgSrc}
               alt={fruit.name}
-              exit={{ scale: 0, rotate: 360 }}
-              transition={{ duration: 0.5 }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0, }}
+              transition={{ duration: 0.3 }}
             />
           )}
         </AnimatePresence>
