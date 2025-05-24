@@ -28,7 +28,7 @@ const GameOver = (props) => {
     <>
       <DialogOverlay timeout={1} duration={1} />
       <motion.div
-        className="fixed text-orange-900  bg-amber-200/70  w-full h-70 top-1/2 -translate-y-1/2 text-center overflow-hidden content-center rounded-4xl shadow-md shadow-yellow-800/80"
+        className="fixed text-orange-900 max-w-[500px] bg-amber-200/70  w-full h-70 top-1/2 left-1/2 -translate-1/2 text-center overflow-hidden content-center rounded-4xl shadow-md shadow-yellow-800/80"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1, type: "spring", delay: delay }}
