@@ -19,7 +19,6 @@ const Scoreboard = (props) => {
           </div>
         </div>
       </motion.div>
-      ;
     </>
   );
 };
