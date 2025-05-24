@@ -12,21 +12,21 @@ const GameObjective = () => {
 
   return (
     <>
-      <div className="fixed top-25 left-5 rounded-full bg-yellow-500 size-10 content-center justify-items-center text-3xl text-green-900 active:scale-90 transition-transform">
+      <div className="fixed  top-20 left-1 rounded-full bg-yellow-500 size-10 content-center justify-items-center text-3xl text-green-900 active:scale-90 transition-transform cursor-pointer">
         <FaInfoCircle onClick={handleToggle} />
       </div>
       {isOpen && (
         <motion.div
-          className="absolute top-1/2 h-2/3 -translate-y-1/2 w-auto text-justify px-10 py-5 bg-yellow-500 rounded-3xl m-5 transition "
+          className="absolute top-1/2 left-1/2 h-2/3 -translate-1/2 w-full text-justify px-10 py-5 bg-yellow-500 rounded-3xl transition max-w-[700px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, ease: "linear" }}
         >
           {" "}
-          <p className="flex justify-end text-2xl my-2 z-2">
-            <IoMdClose onClick={handleToggle} />
+          <p className="flex justify-end text-2xl my-2 z-2 ">
+            <IoMdClose  onClick={handleToggle} className="cursor-pointer"/>
           </p>
-          <div className="overflow-scroll h-90 text-yellow-900">
+          <div className="px-5 overflow-y-scroll scroll-m-0.5 h-90 text-yellow-900">
             <p className="my-5 text-lg text-green-900 font-bold">
               Game Objective
             </p>
