@@ -11,11 +11,10 @@ import useSound from "use-sound";
 const GameOver = () => {
   const [isFormShown, setFormShown] = useState(false);
   const [isLabelShown, setLabelShown] = useState(true);
-  const [playGameOverSound] = useSound(gameOverSound);
+  const [playGameOverSound, {stop}] = useSound(gameOverSound);
   const delay = 2;
 
   useEffect(() => {
-    
     const timeId = setTimeout(() => {
       setFormShown(true);
     }, 1000);
@@ -29,9 +28,10 @@ const GameOver = () => {
     return () => clearInterval(timeId);
   }, []);
 
-  // useEffect(()=> {
-  //   playGameOverSound();
-  // },[])
+  useEffect(()=> {
+    playGameOverSound();
+    return ()=> stop();
+  },[playGameOverSound, stop])
 
   return (
     <>

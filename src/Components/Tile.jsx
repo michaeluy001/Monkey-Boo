@@ -14,7 +14,7 @@ const Tile = (props) => {
   const monkeyInfo = useInitializeMonkey("Monkeyboo");
   const wasClickedRef = useRef(false);
   const [isPopupShown, setPopupshown] = useState(false);
-  const [play] = useSound(pop);
+  const [playPop, {stop}] = useSound(pop);
 
   const handleClick = () => {
     if (props.onDisable) return;
@@ -52,7 +52,8 @@ const Tile = (props) => {
   };
 
   useEffect(()=> {
-    play();
+    playPop();
+    return ()=> stop();
   },[wasClickedRef.current])
 
   return (

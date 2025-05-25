@@ -15,7 +15,7 @@ import { useGameContext } from "./GameContext";
 const LevelUpDialog = (props) => {
   const { maxRound } = useLevelHandler();
   const { round } = useGameContext();
-  const [playLevelClear, { sound }] = useSound(levelClear);
+  const [playLevelClear, { sound, stop }, ] = useSound(levelClear);
   const [playGameWon] = useSound(gameWon);
   const delay = 0.5;
 
@@ -25,7 +25,6 @@ const LevelUpDialog = (props) => {
     handleFadeOut();
     setTimeout(() => {
       props.onNextLevel();
-      stop();
     }, 300);
   };
 
@@ -38,11 +37,12 @@ const LevelUpDialog = (props) => {
   useEffect(() => {
     playLevelClear();
     if (isGameFinished) playGameWon();
-  });
+    return () => handleFadeOut();
+  }, [playLevelClear]);
 
   const handleFadeOut = () => {
     if (sound) {
-      sound.fade(sound.volume(), 0, 1500);
+      sound.fade(sound.volume(), 0, 800);
       setTimeout(() => {
         sound.stop();
         sound.volume(1);
@@ -81,7 +81,7 @@ const LevelUpDialog = (props) => {
         <DialogScore delayTime={delay} />
 
         {!isGameFinished ? (
-          <NextLevelButton onNextLevel={handleNext}  />
+          <NextLevelButton onNextLevel={handleNext} />
         ) : (
           <GameFinishedForm />
         )}
