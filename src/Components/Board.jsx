@@ -14,7 +14,7 @@ import LevelUpDialog from "./LevelUpDialogModal.jsx";
 const Board = (props) => {
   const fruits = useFruitsGenerator(9);
   const monkeyIndex = usePlaceMonkey(9);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isBoardDisabled, setIsBoardDisabled] = useState(false);
   const [score, setScore] = useState(0);
   const { isGameOver } = useGameContext(false);
   const { clickCount } = useClickCounter(score);
@@ -24,7 +24,7 @@ const Board = (props) => {
 
 
   const handleMonkeyFound = () => {
-    setIsDisabled(true);
+    setIsBoardDisabled(true);
   };
 
   const updateScore = (newScr) => {
@@ -33,7 +33,7 @@ const Board = (props) => {
 
   useEffect(() => {
     if (isLevelComplete) {
-      setIsDisabled(true);
+      setIsBoardDisabled(true);
       openDialog();
     }
   }, [isLevelComplete]);
@@ -42,7 +42,7 @@ const Board = (props) => {
     setLevelUpDialogOpen(false);
     props.onLevelUp();
     props.onReset();
-    setIsDisabled(false);
+    setIsBoardDisabled(false);
     props.onGameScoreUpdate(score);
   };
 
@@ -63,7 +63,7 @@ const Board = (props) => {
             key={index}
             fruit={item}
             isAMonkey={index === monkeyIndex}
-            onDisable={isDisabled}
+            onDisable={isBoardDisabled}
             onMonkeyFound={handleMonkeyFound}
             onScoreUpdate={updateScore}
           />
