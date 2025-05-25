@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 
+
 const PostResultDialog = ({ children, className = "" }) => {
+  
   const baseStyle =
     "fixed top-1/2 -translate-y-1/2 w-full left-0 ";
   return (

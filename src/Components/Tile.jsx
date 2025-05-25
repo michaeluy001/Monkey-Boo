@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useInitializeMonkey } from "./MonkeyGenerator";
 import { useGameContext } from "./GameContext";
 import monkeyGood from "/src/assets/monkey good.png";
-import useSound from 'use-sound'
+import useSound from 'use-sound';
 import pop from '/src/assets/pop.mp3';
 
 const Tile = (props) => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const levelGoalMap = {
+
+const roundGoalMap = {
   1: 2,
   2: 3,
   3: 5,
@@ -8,23 +9,25 @@ const levelGoalMap = {
   5: 8,
 };
 
-const maxLevel = Object.keys(levelGoalMap).length;
+const maxRound = Object.keys(roundGoalMap).length;
 
-const useLevelHandler = (level) => {
-  const [goal, setGoal] = useState(levelGoalMap[level]);
+const useLevelHandler = (round) => {
+  const [goal, setGoal] = useState(roundGoalMap[round]);
   useEffect(() => {
-    setGoal(levelGoalMap[level]);
-  }, [level]);
-  return { goal, maxLevel };
+    setGoal(roundGoalMap[round]);
+  }, [round]);
+  return { goal, maxRound };
 };
 
 const useGoalTracker = (clickCount, goal) => {
-  const [isLevelComplete, setIsLevelComplete] = useState(false);
+  const [isRoundComplete, setIsRoundComplete] = useState(false);
   useEffect(() => {
- 
-    if (clickCount >= goal) setIsLevelComplete(true);
+    console.log(`useGoalTracker[Goal:${goal}, Click Count: ${clickCount}`)
+    console.log(`useGoalTracker: is Click count beyond goal now? ${clickCount >= goal}`)
+    if (clickCount >= goal) {setIsRoundComplete(true) 
+      console.log(`useGoalTracker: is Click count beyond goal now? ${clickCount >= goal}`)}
   }, [clickCount]);
-  return { isLevelComplete, setIsLevelComplete };
+  return { isRoundComplete, setIsRoundComplete };
 };
 
 const useClickCounter = (score) => {
@@ -32,7 +35,8 @@ const useClickCounter = (score) => {
   useEffect(() => {
     if (score) setClickCount(clickCount + 1);
   }, [score]);
-  return { clickCount };
+  return { clickCount, setClickCount };
 };
 
-export { useLevelHandler, useGoalTracker, useClickCounter };
+
+export { useLevelHandler, useGoalTracker, useClickCounter, };

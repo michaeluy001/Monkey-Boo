@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
+import { useGameContext } from "./GameContext";
 
-const DialogScore = ({ score, delayTime }) => {
+const DialogScore = ({delayTime}) => {
+  const {gameScore} = useGameContext();
   return (
     <>
       <motion.div
@@ -16,7 +18,7 @@ const DialogScore = ({ score, delayTime }) => {
           animate={{ scale: 1.5, rotate: 360, opacity: 1 }}
           transition={{ duration: 1, delay: delayTime + 1, type: "spring" }}
         >
-          {score}
+          {gameScore}
         </motion.p>
       </motion.div>
     </>

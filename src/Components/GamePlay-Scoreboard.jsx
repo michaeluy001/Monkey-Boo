@@ -1,6 +1,9 @@
+import { useGameContext } from "./GameContext";
 import ReturnButton from "./ReturnButton";
 import { motion } from "motion/react";
-const Scoreboard = (props) => {
+const Scoreboard = () => {
+  const {roundScore} = useGameContext();
+  const {round} = useGameContext();
   return (
     <>
       <motion.div
@@ -12,10 +15,10 @@ const Scoreboard = (props) => {
         <div className="max-w-[600px] border grid grid-cols-3 m-auto items-center text-yellow-500 justify-items-center text-lg whitespace-nowrap py-1 rounded-4xl">
           <ReturnButton className="text-3xl" />
           <div className="text-center text-lg ">
-            Current Score <p className="text-lg">{props.gameScore}</p>
+            Round Score <p className="text-lg">{roundScore}</p>
           </div>
           <div className="text-center flex flex-col">
-            <p>Round</p> <p>{props.level}</p>
+            <p>Round</p> <p>{round}</p>
           </div>
         </div>
       </motion.div>

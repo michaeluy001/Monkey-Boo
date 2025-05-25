@@ -7,7 +7,8 @@ import DialogScore from "./Dialog-Score";
 import gameOverSound from "/src/assets/gameover.mp3";
 import useSound from "use-sound";
 
-const GameOver = (props) => {
+
+const GameOver = () => {
   const [isFormShown, setFormShown] = useState(false);
   const [isLabelShown, setLabelShown] = useState(true);
   const [playGameOverSound] = useSound(gameOverSound);
@@ -28,9 +29,6 @@ const GameOver = (props) => {
     return () => clearInterval(timeId);
   }, []);
 
-  // useEffect(()=> {
-  //   if(isFormShown) playGameOverSound();
-  // },[isFormShown])
 
   return (
     <>
@@ -60,12 +58,12 @@ const GameOver = (props) => {
                 >
                   Game Over
                 </motion.p>
-                <DialogScore score={props.score} delayTime={delay} />
+                <DialogScore delayTime={delay} />
               </>
             )}
           </AnimatePresence>
 
-          {isFormShown && <GameOverForm score={props.score} />}
+          {isFormShown && <GameOverForm />}
         </div>
         <HomeButton className="absolute -left-5 -bottom-5 bg-green-700 size-20" />
       </motion.div>

@@ -4,16 +4,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import PostResultDialog from "./GameFinishedForm-Dg";
+import { useGameContext } from "./GameContext";
+
 const GameFinishedForm = (props) => {
   const [isPostSuccess, setPostSuccess] = useState(false);
   const [isPostFail, setPostFail] = useState(false);
+  const {gameScore} = useGameContext();
+
 
   const nav = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       playerName: e.target.playerName.value,
-      score: props.score,
+      score: gameScore,
     };
 
     try {

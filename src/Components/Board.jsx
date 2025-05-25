@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Tile from "./Tile";
 import useFruitsGenerator from "./useFruitsGenerator.js";
 import { usePlaceMonkey } from "./MonkeyGenerator.js";
@@ -15,35 +15,51 @@ const Board = (props) => {
   const fruits = useFruitsGenerator(9);
   const monkeyIndex = usePlaceMonkey(9);
   const [isBoardDisabled, setIsBoardDisabled] = useState(false);
-  const [score, setScore] = useState(0);
+  const { gameScore, setGameScore } = useGameContext();
   const { isGameOver } = useGameContext(false);
-  const { clickCount } = useClickCounter(score);
-  const { goal} = useLevelHandler(props.level);
-  const { isLevelComplete } = useGoalTracker(clickCount, goal);
+  const { roundScore, setRoundScore } = useGameContext();
+  const { clickCount, setClickCount } = useClickCounter(roundScore);
   const [isLevelUpDialogOpen, setLevelUpDialogOpen] = useState(false);
-
+  const { round, setRound } = useGameContext();
+  const { goal } = useLevelHandler(round);
+  const { isRoundComplete, setIsRoundComplete } = useGoalTracker(
+    clickCount,
+    goal
+  );
+  const [isBoardRunning, setBoardRunning] = useState(false);
 
   const handleMonkeyFound = () => {
     setIsBoardDisabled(true);
   };
 
-  const updateScore = (newScr) => {
-    setScore(score + newScr);
+  const updateGameScore = (newScr) => {
+    setRoundScore(roundScore + newScr);
   };
 
   useEffect(() => {
-    if (isLevelComplete) {
-      setIsBoardDisabled(true);
-      openDialog();
-    }
-  }, [isLevelComplete]);
+    setRound(1);
+  }, []);
+
+  useEffect(() => {
+    if (!isRoundComplete) return;
+    setGameScore(gameScore + roundScore);
+    setIsBoardDisabled(true);
+    openDialog();
+  }, [isRoundComplete]);
+
 
   const handleNextLevel = () => {
     setLevelUpDialogOpen(false);
-    props.onLevelUp();
-    props.onReset();
+    setRound(round + 1);
+    resetBoard();
+  };
+
+  const resetBoard = () => {
     setIsBoardDisabled(false);
-    props.onGameScoreUpdate(score);
+    setBoardRunning(false);
+    setRoundScore(0);
+    setClickCount(0);
+    setIsRoundComplete(false);
   };
 
   const openDialog = () => {
@@ -52,32 +68,35 @@ const Board = (props) => {
     }, 1000);
   };
 
+  const initBoard = () => {
+    setTimeout(() => {
+      setBoardRunning(true);
+    }, 500);
+  };
 
+  useEffect(() => {
+    initBoard();
+  });
 
   return (
     <>
-      <div className="grid grid-cols-3 m-auto justify-items-center max-w-[450px]">
-        {fruits.map((item, index) => (
-          <Tile
-            id={index}
-            key={index}
-            fruit={item}
-            isAMonkey={index === monkeyIndex}
-            onDisable={isBoardDisabled}
-            onMonkeyFound={handleMonkeyFound}
-            onScoreUpdate={updateScore}
-          />
-        ))}
-      </div>
-      {isLevelUpDialogOpen && (
-        <LevelUpDialog
-          onNextLevel={handleNextLevel}
-          score={props.gameScore + score}
-          level={props.level}
-        />
+      {isBoardRunning && (
+        <div className="grid grid-cols-3 m-auto justify-items-center max-w-[450px]">
+          {fruits.map((item, index) => (
+            <Tile
+              id={index}
+              key={index}
+              fruit={item}
+              isAMonkey={index === 0}
+              onDisable={isBoardDisabled}
+              onMonkeyFound={handleMonkeyFound}
+              onScoreUpdate={updateGameScore}
+            />
+          ))}
+        </div>
       )}
+      {isLevelUpDialogOpen && <LevelUpDialog onNextLevel={handleNextLevel} />}
       {isGameOver && <GameOver score={props.gameScore} level={props.level} />}
-
     </>
   );
 };

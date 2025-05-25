@@ -10,12 +10,13 @@ import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import levelClear from "/src/assets/level-clear.mp3";
 import gameWon from "/src/assets/you won.wav";
 import useSound from "use-sound";
+import { useGameContext } from "./GameContext";
 
 const LevelUpDialog = (props) => {
-  const { maxLevel } = useLevelHandler();
+  const { maxRound } = useLevelHandler();
+  const { round } = useGameContext();
   const [playLevelClear, { sound }] = useSound(levelClear);
   const [playGameWon] = useSound(gameWon);
-  const [isModalClosed, setIsModelClosed] = useState(false);
   const delay = 0.5;
 
   const [isGameFinished, setGameFinished] = useState(false);
@@ -29,10 +30,10 @@ const LevelUpDialog = (props) => {
   };
 
   useEffect(() => {
-    if (props.level >= maxLevel) {
+    if (round >= maxRound) {
       setGameFinished(true);
     }
-  }, [props.level]);
+  }, [round]);
 
   useEffect(() => {
     playLevelClear();
@@ -77,12 +78,12 @@ const LevelUpDialog = (props) => {
           </motion.div>
         )}
 
-        <DialogScore score={props.score} delayTime={delay} />
+        <DialogScore delayTime={delay} />
 
         {!isGameFinished ? (
-          <NextLevelButton onNextLevel={handleNext} level={props.level} />
+          <NextLevelButton onNextLevel={handleNext}  />
         ) : (
-          <GameFinishedForm score={props.score} />
+          <GameFinishedForm />
         )}
 
         {isGameFinished && <MonkeyWonOverlay />}
@@ -93,7 +94,8 @@ const LevelUpDialog = (props) => {
   );
 };
 
-export const NextLevelButton = ({ level, onNextLevel }) => {
+export const NextLevelButton = ({ onNextLevel }) => {
+  const { round } = useGameContext();
   return (
     <>
       <motion.div
@@ -103,7 +105,7 @@ export const NextLevelButton = ({ level, onNextLevel }) => {
         transition={{ delay: 1 }}
         onClick={onNextLevel}
       >
-        <p className="">Round {level + 1}</p>
+        <p className="">Round {round + 1}</p>
         <TbPlayerTrackNextFilled />
       </motion.div>
     </>
