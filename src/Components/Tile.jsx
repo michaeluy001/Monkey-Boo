@@ -5,6 +5,7 @@ import { useGameContext } from "./GameContext";
 import monkeyGood from "/src/assets/monkey good.png";
 import useSound from 'use-sound';
 import pop from '/src/assets/pop.mp3';
+import monkeyBooSound from '/src/assets/Monkey scream.wav'
 
 const Tile = (props) => {
   const [isAMonkey, setIsAMonkey] = useState(false);
@@ -14,7 +15,8 @@ const Tile = (props) => {
   const monkeyInfo = useInitializeMonkey("Monkeyboo");
   const wasClickedRef = useRef(false);
   const [isPopupShown, setPopupshown] = useState(false);
-  const [playPop, {stop}] = useSound(pop);
+  const [playPop] = useSound(pop);
+  const [playMonkeyBooSound, {stop}] = useSound(monkeyBooSound);
 
   const handleClick = () => {
     if (props.onDisable) return;
@@ -51,9 +53,13 @@ const Tile = (props) => {
     }, 1000);
   };
 
+  useEffect(()=>{
+    playMonkeyBooSound();
+    return()=> stop();
+  },[isAMonkey])
+
   useEffect(()=> {
     playPop();
-    return ()=> stop();
   },[wasClickedRef.current])
 
   return (
