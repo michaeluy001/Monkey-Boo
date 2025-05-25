@@ -35,8 +35,8 @@ const HomeButton = ({ className = "" }) => {
             <IoMdClose />
           </p>
           <p>Your progress will not be saved. Return to the Main Menu?</p>
-          <ReturnButton className="flex justify-center text-2xl font-bold text-yellow-400 w-auto active:scale-90">
-            Yes
+          <ReturnButton className="flex justify-center text-2xl font-bold text-yellow-400 w-auto active:scale-90 ">
+            <span className="cursor-pointer">Yes</span>
           </ReturnButton>
         </motion.div>
       )}

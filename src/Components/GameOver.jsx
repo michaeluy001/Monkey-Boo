@@ -29,6 +29,9 @@ const GameOver = () => {
     return () => clearInterval(timeId);
   }, []);
 
+  // useEffect(()=> {
+  //   playGameOverSound();
+  // },[])
 
   return (
     <>
